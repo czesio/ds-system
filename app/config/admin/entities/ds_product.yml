@@ -1,0 +1,24 @@
+easy_admin:
+    entities:
+        DsProduct:
+            class: AppBundle\Entity\DsProduct
+            label: 'Products'
+            list:
+            form:
+                title: Add product
+                fields:
+                    - { property: 'serial_no' }
+                    - property: 'k_1'
+                    - { property: 'v_1' }
+                    - property: 'k_2'
+                    - { property: 'v_2' }
+                    - property: 'images'
+                      type: Symfony\Component\Form\Extension\Core\Type\CollectionType
+                      base_path: %app.path.product_images%
+                      download_uri: %app.path.product_images%
+                      type_options:
+                          by_reference: false
+                          allow_add: true
+                          allow_delete: true
+                          entry_type: AppBundle\Form\Type\ImgType
+                          data_class: null
