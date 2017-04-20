@@ -30,16 +30,15 @@ class DsProduct
     private $serialNo;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="category_id", type="integer")
+     * Many Users have One Address.
+     * @ORM\ManyToOne(targetEntity="DsCategory")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
-    private $categoryId;
+    private $category;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="k_1", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="DsKey")
+     * @ORM\JoinColumn(name="k_1", referencedColumnName="id")
      */
     private $k1;
 
@@ -51,9 +50,8 @@ class DsProduct
     private $v1;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="k_2", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="DsKey")
+     * @ORM\JoinColumn(name="k_2", referencedColumnName="id")
      */
     private $k2;
 
@@ -65,9 +63,8 @@ class DsProduct
     private $v2;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="k_3", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="DsKey")
+     * @ORM\JoinColumn(name="k_3", referencedColumnName="id")
      */
     private $k3;
 
@@ -196,23 +193,23 @@ class DsProduct
     }
 
     /**
-     * Set k1
+     * Set K1
      *
-     * @param integer $k1
+     * @param \AppBundle\Entity\DsKey $key
      *
      * @return DsProduct
      */
-    public function setK1($k1)
+    public function setK1(\AppBundle\Entity\DsKey $key = null)
     {
-        $this->k1 = $k1;
+        $this->k1 = $key;
 
         return $this;
     }
 
     /**
-     * Get k1
+     * Get K1
      *
-     * @return int
+     * @return \AppBundle\Entity\DsKey
      */
     public function getK1()
     {
@@ -519,5 +516,29 @@ class DsProduct
         }
     }
 
-}
 
+
+    /**
+     * Set category
+     *
+     * @param \AppBundle\Entity\DsCategory $category
+     *
+     * @return DsProduct
+     */
+    public function setCategory(\AppBundle\Entity\DsCategory $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \AppBundle\Entity\DsCategory
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+}

@@ -9,9 +9,9 @@
 # The configuration options are explained in detail in the bundle documentation,
 # which is published at https://github.com/javiereguiluz/EasyAdminBundle
 easy_admin:
-    site_name: 'ACME Backend'
+    site_name: 'DS - electronic'
     design:
-        form_theme:   'vertical'
+        form_theme: [ 'vertical' ] #, 'VichUploaderBundle:Form:fields.html.twig' ]
         color_scheme: 'dark'
         assets:
             css:

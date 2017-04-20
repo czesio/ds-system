@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * DsCategory
@@ -35,20 +36,26 @@ class DsCategory
      */
     private $description;
 
+
     /**
-     * @var int
-     *
-     * @ORM\Column(name="category_id", type="integer", nullable=true)
+     * One Student has One Student.
+     * @ORM\OneToOne(targetEntity="DsCategory")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     private $categoryId;
 
     /**
-     * @var int
      *
-     * @ORM\Column(name="deep", type="integer")
+     * @ORM\ManyToMany(targetEntity="DsImage", inversedBy="categories", cascade={"persist"})
+     * @ORM\JoinTable(name="ds_category_image")
      */
-    private $deep;
+    private $images;
 
+
+    public function __construct()
+    {
+        $this->images = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -155,5 +162,48 @@ class DsCategory
     {
         return $this->deep;
     }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
+    public function addImage($image)
+    {
+        if ($this->images->contains($image)) {
+            return;
+        }
+
+        $this->images->add($image);
+        $image->addCategory($this);
+    }
+
+    public function removeImage($image)
+    {
+        if (!$this->images->contains($image)) {
+            return;
+        }
+
+        $this->images->removeElement($image);
+        $image->removeCategory($this);
+    }
+
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    public function setImages($images)
+    {
+        // This is the owning side, we have to call remove and add to have change in the category side too.
+        foreach ($this->getImages() as $image) {
+            $this->removeImage($image);
+        }
+        foreach ($images as $image) {
+            $this->addImage($image);
+        }
+    }
+
+
 }
 

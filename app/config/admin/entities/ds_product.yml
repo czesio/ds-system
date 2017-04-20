@@ -1,17 +1,24 @@
 easy_admin:
     entities:
         DsProduct:
+            controller: AppBundle\Controller\Admin\DsProductController
             class: AppBundle\Entity\DsProduct
             label: 'Products'
             list:
+                actions: ['copyProduct']
+                fields:
+                    - serial_no
+                    - category
+                    - v1
+                    - v2
+                    - v3
             form:
                 title: Add product
                 fields:
-                    - { property: 'serial_no' }
-                    - property: 'k_1'
-                    - { property: 'v_1' }
-                    - property: 'k_2'
-                    - { property: 'v_2' }
+                    - { type: 'group', css_class: 'col-sm-8 new-row', label: 'Basic info', icon: 'pencil' }
+                    - { property: 'serialNo' }
+                    - { property: 'category' }
+                    - { type: 'group', css_class: 'col-sm-4', label: 'Product images', icon: 'image' }
                     - property: 'images'
                       type: Symfony\Component\Form\Extension\Core\Type\CollectionType
                       base_path: %app.path.product_images%
@@ -22,3 +29,12 @@ easy_admin:
                           allow_delete: true
                           entry_type: AppBundle\Form\Type\ImgType
                           data_class: null
+                    - { type: 'group', css_class: 'col-sm-8' }
+                    - { property: 'k1'  }
+                    - { property: 'v1' }
+                    - { property: 'k2' }
+                    - { property: 'v2' }
+                    - { property: 'k3' }
+                    - { property: 'v3' }
+                    - { property: 'k4' }
+                    - { property: 'v4' }

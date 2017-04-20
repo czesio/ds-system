@@ -19,9 +19,10 @@ class ImgType extends AbstractType
             'required' => false,
             'allow_delete' => true, // optional, default is true
             'download_link' => true, // optional, default is true
-        //    //'base_path' => 'uploads/images/products/'
-        //    //'download_uri' => 'uploads/images/products/', // optional, if not provided - will automatically resolved using storage
-        ]);
+            'data_class' => null,
+            //'download_uri' => './uploads/images/products/', // optional, if not provided - will automatically resolved using storage
+            //    //'base_path' => 'uploads/images/products/'
+              ]);
 //            ->add('product', 'entity',
 //                array('class' => 'Aco\InvoiceBundle\Entity\Product',
 //                    'required' => true,

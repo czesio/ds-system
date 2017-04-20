@@ -55,10 +55,22 @@ class DsImage
      **/
     protected $products;
 
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="DsCategory", mappedBy="images", cascade={"persist"})
+     **/
+    protected $categories;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     * @var string
+     */
+    private $imageName;
 
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     /**
@@ -78,9 +90,9 @@ class DsImage
      *
      * @return DsImage
      */
-    public function setName($name)
+    public function setImageName($name)
     {
-        $this->name = $name;
+        $this->imageName = $name;
 
         return $this;
     }
@@ -90,9 +102,9 @@ class DsImage
      *
      * @return string
      */
-    public function getName()
+    public function getImageName()
     {
-        return $this->name;
+        return $this->imageName;
     }
 
     /**
@@ -115,6 +127,7 @@ class DsImage
         return $this->updatedAt;
     }
 
+    ///////////////////////////// PRODUCT
     public function addProduct(\AppBundle\Entity\DsProduct $product)
     {
         if ($this->products->contains($product)) {
@@ -132,7 +145,7 @@ class DsImage
         }
 
         $this->products->removeElement($product);
-        $product->removeKey($this);
+        $product->removeImage($this);
     }
 
     public function getProducts()
@@ -146,17 +159,52 @@ class DsImage
         $this->products = new ArrayCollection($products);
     }
 
+    ///////////////////////////// CATEGORY
+    public function addCategory(\AppBundle\Entity\DsCategory $category)
+    {
+        if ($this->categories->contains($category)) {
+            return;
+        }
+
+        $this->categories->add($category);
+        $category->addImage($this);
+    }
+
+    public function removeCategory($category)
+    {
+        if (!$this->categories->contains($category)) {
+            return;
+        }
+
+        $this->categories->removeElement($category);
+        $category->removeImage($this);
+    }
+
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    public function setCategories($categories)
+    {
+        $this->categories->clear();
+        $this->categories = new ArrayCollection($categories);
+    }
+
     /**
      * @param File|UploadedFile $image
      */
     public function setImageFile($image = null)
     {
         $this->imageFile = $image;
-        $this->image = $image;
+        //$this->image = $image;
+        //var_dump($image->getClientOriginalName());die();
+        //$this->image = ((is_object($image) && method_exists($image, 'getClientOriginalName')) ? $image->getClientOriginalName() : '');
         // VERY IMPORTANT:
         // It is required that at least one field changes if you are using Doctrine,
         // otherwise the event listeners won't be called and the file is lost
         if ($image) {
+            //$this->setImageName($image->getClientOriginalName());die();
             // if 'updatedAt' is not defined in your entity, use another property
             $this->updatedAt = new \DateTime('now');
         }
@@ -177,15 +225,22 @@ class DsImage
         return $this->image;
     }
 
+
     /**
      * @ORM\PrePersist()
      * @ORM\PreUpdate()
      */
     public function preUpload()
     {
-
+//        var_dump($this->getImage());die();
         //$this->setImage();
-//var_dump($this); die();
+//        if (is_object($this->getImageFile()))
+//        {
+//            $this->image = ($this->getImageFile()->getClientOriginalName());
+//        }
+        //$this->setImageName($this->getImage()->getClientOriginalName());
+//$this->setImageName($this->getImage()); //->getImageFile()->getClientOriginalName() );
+ //die();
 //        $this->tempFile = $this->getAbsolutePath();
 //
 //
@@ -209,5 +264,9 @@ class DsImage
 //                $this->alt = "Votre image est trop grande ou trop petite veuillez choisir une autre image s.v.p";
 //            }
 //        }
+    }
+
+    public function getCos() {
+        return $this->getImageName();
     }
 }

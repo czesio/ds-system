@@ -1,0 +1,25 @@
+easy_admin:
+    entities:
+        DsCategory:
+            class: AppBundle\Entity\DsCategory
+            label: 'Categorys'
+            list:
+                fields:
+                    - id
+                    - name
+                    - categoryId
+            form:
+                fields:
+                    - { property: 'name'}
+                    - { property: 'description', type: 'ckeditor' }
+                    - { property: 'categoryId' }
+                    - property: 'images'
+                      type: Symfony\Component\Form\Extension\Core\Type\CollectionType
+                      base_path: %app.path.product_images%
+                      download_uri: %app.path.product_images%
+                      type_options:
+                          by_reference: false
+                          allow_add: true
+                          allow_delete: true
+                          entry_type: AppBundle\Form\Type\ImgType
+                          data_class: null
