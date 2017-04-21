@@ -1,0 +1,37 @@
+table.product_data {
+    font-size: 11px; width:100% !important;
+}
+table.product_data thead tr {
+    background-color: #67b168;
+}
+table.product_data thead tr th {
+    color: #ffffff;
+}
+
+.content_hr {
+    width: 100%; margin: 0; padding: 0;
+}
+.content_side {
+    width:75% !important; float:right; display: inline-block;
+}
+.img_side {
+    width: 25% !important; float: left; display: inline-block;
+}
+.img_in {
+    display: inline; max-width:75%;
+}
+.break_row {
+    clear:both; float: none;
+}
+.wrap_content {
+    width:100%; display: block;
+}
+p {
+    font-size: 12px;
+}
+h1 {
+    font-size: 18px;
+}
+h2 {
+    font-size: 15px;
+}

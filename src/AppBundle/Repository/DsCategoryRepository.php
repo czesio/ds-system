@@ -10,4 +10,14 @@ namespace AppBundle\Repository;
  */
 class DsCategoryRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getAllChildrenForSelectedParent($entity)
+    {
+        $repository = $this->getEntityManager()->getRepository('AppBundle:DsCategory');
+        $query = $repository->createQueryBuilder('c')
+            ->where('c.categoryId = :catRoot')
+            ->setParameter('catRoot', $entity->getId())
+            ->orderBy('c.name', 'ASC')
+            ->getQuery();
+        return $query->getResult();
+    }
 }

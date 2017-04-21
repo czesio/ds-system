@@ -10,9 +10,11 @@ easy_admin:
                     - categoryId
             form:
                 fields:
+                    - { type: 'group', css_class: 'col-sm-8', label: 'Basic info', icon: 'pencil' }
                     - { property: 'name'}
                     - { property: 'description', type: 'ckeditor' }
                     - { property: 'categoryId' }
+                    - { type: 'group', css_class: 'col-sm-4', label: 'Category images', icon: 'image' }
                     - property: 'images'
                       type: Symfony\Component\Form\Extension\Core\Type\CollectionType
                       base_path: %app.path.product_images%

@@ -10,6 +10,7 @@ parameters:
     locale: en
     app.path.product_images: /uploads/images/products
     app.path.user_contracts: /uploads/files/user/contracts
+    app.mpdf.css: '/bundles/app/stylesheets/mpdf.css'
 
 framework:
     #esi:             ~
@@ -70,6 +71,9 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: AppBundle\Entity\User
+    from_email:
+        address:        noreply@example.com
+        sender_name:    Demo App
 
 swiftmailer:
     transport: null

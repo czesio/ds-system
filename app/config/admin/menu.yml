@@ -9,6 +9,8 @@
 # The configuration options are explained in detail in the bundle documentation,
 # which is published at https://github.com/javiereguiluz/EasyAdminBundle
 easy_admin:
+    list:
+        max_results: 100
     design:
         menu:
 #            - label: 'menu.product'
@@ -19,10 +21,10 @@ easy_admin:
 #                  - { entity: 'Product', icon: 'plus-circle', label: 'menu.product.add', params: { action: 'new' } }
 #            - { label: 'menu.customer', entity: 'User', icon: 'users' }
 #            - { label: 'menu.purchase', entity: 'Purchase', icon: 'credit-card', params: { sortField: 'deliveryDate' } }
-#            - { label: 'menu.about' }
+            - { label: 'Make PDF', url: 'make_pdf' }
 #            - { label: 'menu.about.home', url: 'https://github.com/javiereguiluz/EasyAdminBundle', icon: 'home', target: '_blank' }
 #            - { label: 'menu.about.docs', url: 'https://github.com/javiereguiluz/EasyAdminBundle#getting-started-guide', icon: 'book', target: '_blank' }
 #            - { label: 'menu.about.issues', url: 'https://github.com/javiereguiluz/EasyAdminBundle/issues', icon: 'github', target: '_blank' }
             - { label: 'menu.product', entity: 'DsProduct', icon: 'file' }
             - { label: 'menu.key', entity: 'DsKey', icon: 'key' }
-            - { label: 'menu.category', entity: 'DsCategory', icon: 'share-alt' }
+            - { label: 'menu.category', route: 'homepage', entity: 'DsCategory', icon: 'share-alt' }
