@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 EasyAdmin Demo
 ==============
 
@@ -17,3 +18,6 @@ How to install this project
   1. `php bin/console assets:install --symlink`
   1. `php bin/console server:run`
   1. Browse `http://127.0.0.1:8000/admin/`
+=======
+# ds-system
+>>>>>>> c4479aaaff6893639e4df3bded2e5407023c4480
