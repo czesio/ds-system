@@ -124,9 +124,19 @@ class DsProduct
      */
     private $images;
 
+
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="DsSimilarProduct", inversedBy="products", cascade={"persist"})
+     * @ORM\JoinTable(name="ds_product_similar_product")
+     */
+    private $similarProducts;
+
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->similarProducts = new ArrayCollection();
     }
 
     public function __toString()
@@ -516,6 +526,42 @@ class DsProduct
         }
     }
 
+    /////////////////////////////////////////////////////////// similar products
+    public function addSimilarProduct($similarProduct)
+    {
+        if ($this->similarProducts->contains($similarProduct)) {
+            return;
+        }
+
+        $this->similarProducts->add($similarProduct);
+        $similarProduct->addProduct($this);
+    }
+
+    public function removeSimilarProduct($similarProduct)
+    {
+        if (!$this->similarProducts->contains($similarProduct)) {
+            return;
+        }
+
+        $this->similarProducts->removeElement($similarProduct);
+        $similarProduct->removeProduct($this);
+    }
+
+    public function getSimilarProducts()
+    {
+        return $this->similarProducts;
+    }
+
+    public function setSimilarProducts($similarProducts)
+    {
+        // This is the owning side, we have to call remove and add to have change in the category side too.
+        foreach ($this->getSimilarProducts() as $similarProduct) {
+            $this->removeSimilarProduct($similarProduct);
+        }
+        foreach ($similarProducts as $similarProduct) {
+            $this->addSimilarProduct($similarProduct);
+        }
+    }
 
 
     /**

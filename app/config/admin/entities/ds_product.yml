@@ -15,9 +15,27 @@ easy_admin:
             form:
                 title: Add product
                 fields:
-                    - { type: 'group', css_class: 'col-sm-8 new-row', label: 'Basic info', icon: 'pencil' }
+                    - { type: 'group', css_class: 'col-sm-8', label: 'Basic info', icon: 'pencil' }
                     - { property: 'serialNo' }
                     - { property: 'category' }
+                    - { type: 'group', css_class: 'col-sm-4', label: 'Simlar products', icon: 'image' }
+                    - property: 'similarProducts'
+                      type: Symfony\Component\Form\Extension\Core\Type\CollectionType
+                      type_options:
+                          by_reference: false
+                          allow_add: true
+                          allow_delete: true
+                          entry_type: AppBundle\Form\Type\SimilarProductType
+                          data_class: null
+                    - { type: 'group', css_class: 'col-sm-8' }
+                    - { property: 'k1'  }
+                    - { property: 'v1' }
+                    - { property: 'k2' }
+                    - { property: 'v2' }
+                    - { property: 'k3' }
+                    - { property: 'v3' }
+                    - { property: 'k4' }
+                    - { property: 'v4' }
                     - { type: 'group', css_class: 'col-sm-4', label: 'Product images', icon: 'image' }
                     - property: 'images'
                       type: Symfony\Component\Form\Extension\Core\Type\CollectionType
@@ -29,12 +47,3 @@ easy_admin:
                           allow_delete: true
                           entry_type: AppBundle\Form\Type\ImgType
                           data_class: null
-                    - { type: 'group', css_class: 'col-sm-8' }
-                    - { property: 'k1'  }
-                    - { property: 'v1' }
-                    - { property: 'k2' }
-                    - { property: 'v2' }
-                    - { property: 'k3' }
-                    - { property: 'v3' }
-                    - { property: 'k4' }
-                    - { property: 'v4' }
