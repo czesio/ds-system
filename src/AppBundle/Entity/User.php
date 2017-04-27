@@ -22,12 +22,6 @@ class User extends BaseUser
      */
     protected $id;
 
-    /**
-     * @var Purchase[]
-     *
-     * @ORM\OneToMany(targetEntity="Purchase", mappedBy="buyer", cascade={"remove"})
-     */
-    private $purchases;
 
     /**
      * @var bool
@@ -65,7 +59,6 @@ class User extends BaseUser
     {
         parent::__construct();
 
-        $this->purchases = new ArrayCollection();
         $this->isActive = true;
     }
 
@@ -93,21 +86,6 @@ class User extends BaseUser
         return $this->isActive;
     }
 
-    /**
-     * @param Purchase[] $purchases
-     */
-    public function setPurchases($purchases)
-    {
-        $this->purchases = $purchases;
-    }
-
-    /**
-     * @return Purchase[]
-     */
-    public function getPurchases()
-    {
-        return $this->purchases;
-    }
 
     /**
      * @param File $contract
